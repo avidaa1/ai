@@ -924,6 +924,9 @@ var MODELS=[
   {y:2026,name:'Gemini 3.5 Flash',cr:'Google DeepMind',dt:'May 2026',era:'now',par:'Undisclosed',ctx:'1M',open:false,mul:true,sf:'safe',desc:'Launched Google I/O 2026. Outperforms Gemini 3.1 Pro at 4× speed. Intelligence Index: 55 (vs Claude Sonnet 4.6 at 52). 284 tokens/sec. Powers Gemini Spark personal agent. 3× price jump from Gemini 3 Flash.',tags:['google','frontier','2026','agentic','fast']},
   {y:2026,name:'GPT-5.5',cr:'OpenAI',dt:'Apr 2026',era:'now',par:'Undisclosed',ctx:'1M',open:false,mul:true,sf:'moderate',desc:'OpenAI flagship April 2026. Standard/Thinking/Pro variants. Tops creative writing benchmarks. $5/$30 per 1M tokens. Paired with GPT-5.2 Codex for agentic coding. Intelligence Index: 60.2.',tags:['openai','frontier','2026','reasoning']},
   {y:2026,name:'GPT-5.4',cr:'OpenAI',dt:'Apr 2026',era:'now',par:'Undisclosed',ctx:'1M',open:false,mul:true,sf:'moderate',desc:'Pre-cursor to GPT-5.5. SWE-bench 74.9%, Reasoning 92.8%. Standard, Thinking, and Pro variants. True successor to GPT-5.2.',tags:['openai','frontier','2026']},
+  {y:2026,name:'Claude Sonnet 5',cr:'Anthropic',dt:'Jun 30 2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'safe',desc:'Most agentic Sonnet ever. Default for Free/Pro/Max/Team plans. Close to Opus 4.8 quality at lower cost. Introductory: $2/$10 per 1M tokens (through Aug 31 2026), then $3/$15. New tokenizer (1.0-1.35x inflation). First Claude model to critique its own Constitution rule. Agentic coding: ~63.2% (Opus 4.8: 69.2%). Beats Opus 4.8 on GDPval-AA knowledge-work benchmark.',tags:['anthropic','frontier','2026','agentic','default']},
+  {y:2026,name:'Claude Mythos 5',cr:'Anthropic',dt:'Jun 9 2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'restricted',desc:'Most capable and most restricted model ever released by Anthropic. Same base as Fable 5 with cybersecurity + biology safeguards lifted. Project Glasswing: 150+ vetted partners, 15+ countries. 10,000+ critical vulnerabilities found in critical software. Drug design 10x. Novel genomics outperforms Science paper model at 1/100 the size. $10/$50 per 1M tokens. Access SUSPENDED Jun 12 2026 by US government export control directive.',tags:['anthropic','restricted','glasswing','2026']},
+  {y:2026,name:'Claude Fable 5',cr:'Anthropic',dt:'Jun 9 2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'safe',desc:'Mythos 5 with safety classifiers for cybersecurity, biology, and distillation. State-of-the-art nearly all benchmarks. Stripe: compressed months into days on 50M-line Ruby codebase. Beat Pokemon FireRed with vision only. Leads FrontierCode coding eval. 30-day data retention required. $10/$50 per 1M tokens. Access SUSPENDED Jun 12 2026 by US government export control directive.',tags:['anthropic','frontier','2026','agentic']},
   {y:2026,name:'Claude Opus 4.8',cr:'Anthropic',dt:'May 28 2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'safe',desc:'Current Anthropic flagship June 2026. Leads Artificial Analysis Intelligence Index at 61.4. Top coding benchmarks. $5/$25 per 1M tokens. 128K output token limit. Best for long-form generation and complex agents.',tags:['anthropic','frontier','2026','coding']},
   {y:2026,name:'Claude Opus 4.7',cr:'Anthropic',dt:'Apr 16 2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'safe',desc:'Scores 57.28 on Artificial Analysis Intelligence Index. SWE-bench 52.51%. Complex reasoning and long-running agent workflows. Preceded Opus 4.8 by 6 weeks.',tags:['anthropic','frontier','2026','agentic']},
   {y:2026,name:'Grok 4 / Grok 4.3',cr:'xAI',dt:'2026',era:'now',par:'Undisclosed',ctx:'200K',open:false,mul:true,sf:'moderate',desc:'Grok 4.3 cheapest frontier model per token. Leads Humanity\x27s Last Exam at 50.7%. Enhanced real-time X/Twitter access. Strong agentic and tool-use scores. Best budget frontier pick Q2 2026.',tags:['xai','frontier','2026','budget','hle']},
@@ -1917,6 +1920,268 @@ function buildBuild(){
 // ================================================================
 var BLOG_POSTS=[
   {
+    id:'medicine',date:'2026-06-16',tag:'DEEP DIVE',col:'#10b981',
+    title:'AI in Medicine — From Protein Folding to Autonomous Surgery',
+    author:'AVIDAA Archive',readTime:'9 min',
+    body:`The 2024 Nobel Prize in Chemistry went to three people who used computers to solve a problem biologists had considered impossible: predicting how a protein folds from its amino acid sequence. Demis Hassabis and John Jumper of DeepMind won for AlphaFold. David Baker won for computational protein design. The committee was acknowledging something that had already happened — AI had transformed biology.
+
+**AlphaFold — What It Did and Why It Mattered**
+
+Proteins are the machinery of life. Every cellular process — digestion, immune response, gene expression, signal transmission — is executed by proteins whose function is determined entirely by their three-dimensional shape. Knowing the shape means understanding the function. Understanding the function means designing drugs that bind precisely to the right target.
+
+Before AlphaFold, determining a protein's structure required X-ray crystallography or cryo-electron microscopy — expensive, time-consuming laboratory processes that could take years per protein. As of 2020, fewer than 200,000 protein structures had been solved in the entire history of science.
+
+AlphaFold 2 (2021) solved this computationally. By 2022, DeepMind and EMBL released a database of 200 million protein structure predictions — covering virtually every protein in every known organism. AlphaFold 3 (May 2024) extended the capability to predict interactions between proteins, DNA, RNA, ligands, and ions using a new Pairformer architecture and diffusion refinement model, achieving approximately 50% accuracy improvement on protein-molecule interactions.
+
+The downstream impact is only beginning to materialize.
+
+**Isomorphic Labs — AlphaFold Meets Drug Discovery**
+
+Isomorphic Labs was spun out of DeepMind in 2021 specifically to apply AlphaFold to drug discovery. In March 2025 it raised $600M in its first external round, led by Thrive Capital with GV and Alphabet. By 2026, Isomorphic's IsoDDE (Drug Design Engine) had moved beyond structure prediction to active drug design — using AI to generate candidate molecules, predict their binding affinity, optimize toxicity profiles, and iterate through design cycles in hours rather than months.
+
+The company's first-in-human oncology trials were expected by end of 2026. For context: the average drug takes 10-15 years and $2.6B to reach approval. If Isomorphic can compress that timeline by 2-3x — which is the stated target — the public health implications are enormous.
+
+**FDA AI Medical Devices**
+
+As of December 2025, the FDA had authorized 1,451 AI-enabled medical devices. 1,104 of them (76%) are in radiology — AI reading scans, detecting anomalies, flagging findings for human review. GE HealthCare leads with 120 radiology AI authorizations.
+
+The numbers sound large, but the clinical reality is more selective. AI reading chest X-rays and mammograms has reached clinical deployment because those are standardized image formats with well-defined ground truth. Dermatology AI (skin lesion classification) is close behind. Mental health AI has zero FDA authorizations — despite 57.8 million Americans having a diagnosed mental illness — because mental health assessments are subjective, multi-dimensional, and poorly suited to the supervised-learning paradigm.
+
+**Cancer Detection**
+
+The German PRAIM study published in Nature Medicine in January 2025 analyzed 463,094 women in a national mammography screening program. AI-supported reading achieved a breast cancer detection rate of 6.7 per 1,000 screened — 17.6% higher than standard double reading — without increasing the recall rate. Retrospective analysis suggests AI could detect 20-40% of cancers that were visible on prior mammograms but missed by human readers.
+
+This is not a future capability. It is deployed in multiple European healthcare systems. The gap between clinical evidence and widespread adoption is regulatory, economic, and institutional — not technical.
+
+**Robotic Surgery**
+
+The da Vinci surgical system has been used in over 10 million procedures. It is not autonomous — a surgeon controls every movement remotely. The STAR (Smart Tissue Autonomous Robot, Johns Hopkins) autonomously sutured intestinal tissue in 2022 — the first documented case of a robot autonomously performing a step in soft-tissue surgery. The Mako system guides joint replacement implant placement using AI and patient-specific CT data.
+
+Full surgical autonomy — a robot performing an entire procedure from incision to closure without human guidance — is not deployed anywhere. It is the research frontier, not the clinical reality.
+
+**What Comes Next**
+
+The convergence is happening faster in drug discovery than in clinical medicine, for a simple reason: drug discovery operates on molecules and data, while clinical medicine operates on patients and institutions. Regulatory approval, liability, insurance reimbursement, and physician trust are frictions that data and compute cannot directly overcome.
+
+The five-year projection: AI will be involved in identifying and validating every major drug candidate. The 10-15 year drug timeline will compress to 5-7 years for some targets. In clinical medicine, AI will be standard in radiology and pathology worldwide and will begin entering surgery as a guidance layer rather than an autonomous actor. The medical profession will not be replaced. It will be restructured around AI-identified findings that humans verify and act on.
+
+Nobel Prizes in chemistry will not be the last given to people who used AI to solve biological problems.`
+  },
+  {
+    id:'openaisplit',date:'2026-06-10',tag:'HISTORY',col:'#f59e0b',
+    title:'The OpenAI Split — How One Company Became the Entire Industry',
+    author:'AVIDAA Archive',readTime:'10 min',
+    body:`In November 2015, Sam Altman, Elon Musk, Greg Brockman, Ilya Sutskever, and several others founded OpenAI as a nonprofit research laboratory. The founding documents stated that its purpose was "to advance digital intelligence in the way that is most likely to benefit humanity as a whole, unconstrained by a need to generate financial return." Within eight years, that organization had generated nearly $300 billion in market value, been sued by one of its cofounders, fired and rehired its CEO within five days, and become the most consequential technology company in the world. Multiple companies founded by people who left OpenAI — Anthropic, SSI, Perplexity, Cohere, Character.ai — have a combined valuation exceeding $150 billion.
+
+The entire AI industry is, in a meaningful sense, OpenAI's diaspora.
+
+**The Early Years and the Safety Argument**
+
+OpenAI was founded with a dual thesis: AI was coming regardless, so it was better to have safety-focused researchers at the frontier than to cede that ground to less safety-conscious actors. The founders contributed $1 billion in pledged funds. Musk was the initial chairman and primary donor. Sutskever — who had been one of Geoffrey Hinton's students at the University of Toronto and a co-creator of AlexNet — became the head of research.
+
+GPT-1 (2018), GPT-2 (2019, initially withheld over misuse concerns), GPT-3 (2020) established the scaling paradigm. Each model was meaningfully more capable than the last. Each one cost more to train. The nonprofit structure was incompatible with the capital requirements of frontier AI research.
+
+**The Musk Departure and Capped-Profit Conversion**
+
+Elon Musk departed OpenAI's board in February 2018. The stated reason was a potential conflict with his work at Tesla on autonomous driving AI. The real reason, by multiple accounts, was a disagreement over control: Musk wanted to take over as CEO, was rebuffed, and left. He would spend the next six years publicly criticizing OpenAI and eventually founding xAI (2023) and suing OpenAI (2024).
+
+In 2019, OpenAI converted to a "capped-profit" structure — a for-profit subsidiary limited to 100x returns for investors, with the nonprofit retaining governance. This allowed OpenAI to raise external capital. Microsoft invested $1 billion in 2019, and the partnership that would eventually produce the Bing ChatGPT integration began.
+
+**The Anthropic Split (2021)**
+
+The departure that most shaped the industry was not Musk's. It was Dario Amodei's.
+
+Dario had joined OpenAI as VP of Research and was deeply involved in GPT-3. Daniela Amodei, his younger sister, handled safety and policy. In late 2020, a group of roughly ten senior OpenAI researchers — including Dario, Daniela, Chris Olah (interpretability), Tom Brown (co-creator of GPT-3), and Jared Kaplan (scaling laws) — became increasingly concerned that OpenAI's safety culture was deteriorating as the company scaled commercially. The core disagreement: as OpenAI raised more money and moved faster, the pressure to deploy capable systems was outrunning the ability to understand what those systems were doing internally.
+
+They left in late 2020 and founded Anthropic in 2021. The timing was quiet — the departure was not publicly described as a safety-motivated split at the time. Over subsequent years, Anthropic's Constitutional AI approach and public safety commitments made the philosophical divergence explicit.
+
+**The Board Crisis (November 2023)**
+
+On November 17, 2023, OpenAI's nonprofit board removed Sam Altman as CEO. The board consisted of five members: Adam D'Angelo (Quora CEO), Tasha McCauley, Helen Toner, and two OpenAI insiders. The stated reason: Altman had "not been consistently candid in his communications with the board." The specifics were never fully disclosed.
+
+Ilya Sutskever — who had voted with the board to remove Altman — posted publicly the next day that he "deeply regret[ted] his participation." The intervention had been partly driven by concerns about AI capability development pace.
+
+Within hours of the firing, virtually the entire OpenAI staff (approximately 700 people) signed an open letter threatening to leave unless Altman was reinstated. Microsoft, which had invested $13 billion in OpenAI, threatened to hire the entire staff if necessary. By November 22, Altman was reinstated. The board members who had voted to remove him resigned. A new board — with Larry Summers and Bret Taylor added — replaced them.
+
+The crisis revealed the fundamental instability of the dual nonprofit/for-profit structure: the nonprofit board had legal control but zero practical power, because the workforce and the investors were more powerful than the governance structure.
+
+**The Superalignment Unraveling (2024)**
+
+In May 2023, OpenAI announced the Superalignment team — a four-year initiative led by Sutskever and Jan Leike to develop scalable oversight methods for superintelligent AI. It was assigned 20% of OpenAI's compute budget.
+
+By May 2024, the team was effectively disbanded. Leike resigned and published a detailed critique: "Safety culture and processes have taken a backseat to shiny products." Sutskever announced his departure on the same day. He later founded SSI (Safe Superintelligence) — a company with a single stated goal: build safe superintelligence, with no product releases until that goal is achieved. SSI raised approximately $6 billion in its first year.
+
+Paul Christiano, who had originated much of the RLHF methodology at OpenAI before founding ARC (AI Safety Research Center), has consistently argued that the safety/capability tradeoff is real and that OpenAI's decisions since 2022 have leaned consistently toward capability.
+
+**The For-Profit Conversion and Musk Trial (2025-2026)**
+
+In 2025, OpenAI moved to fully separate the for-profit entity from the nonprofit. After pressure from state attorneys general and Musk's lawsuit, it modified the plan: OpenAI Group PBC (Public Benefit Corporation) was formed, with the nonprofit retaining 26% and Microsoft holding approximately 27%. The structure gives investors economic returns without the capped-profit constraints.
+
+Musk's lawsuit argued that the for-profit conversion violated the terms of the original founding charitable mission. On May 18, 2026, a jury in San Francisco found for OpenAI and Altman — holding that Musk's claims were barred by the statute of limitations. Musk announced he would appeal.
+
+**The Diaspora That Built an Industry**
+
+The full roster of companies founded by former OpenAI employees is striking: Anthropic (Dario Amodei, Daniela Amodei, Chris Olah, Tom Brown, and others), Cohere (Aidan Gomez — co-author of "Attention Is All You Need" — from Google Brain, but closely connected to the OpenAI/Google research ecosystem), Character.ai (Noam Shazeer and Daniel De Freitas from Google LaMDA), Perplexity (Aravind Srinivas), SSI (Ilya Sutskever), Cognition (Scott Wu).
+
+The people who built GPT-3 — the model that established the scaling paradigm — have collectively started companies worth hundreds of billions of dollars. The intellectual lineage of modern AI traces directly through one organization's early research team.
+
+Whether OpenAI's structure — now a for-profit PBC with a nonprofit retaining governance — produces better outcomes than Anthropic's (a PBC with no nonprofit overlay, but strong public safety commitments) or SSI's (no product until safe superintelligence, full stop) is the defining organizational question of the next decade of AI.`
+  },
+  {
+    id:'amodei',date:'2026-06-09',tag:'PROFILE',col:'#a78bfa',
+    title:'Dario and Daniela Amodei — The Siblings Who Bet on Safety',
+    author:'AVIDAA Archive',readTime:'6 min',
+    body:`In 2021, Dario and Daniela Amodei left OpenAI with eight colleagues and founded Anthropic. They took no equity, no technology, and no code. They took a thesis: that the responsible path to powerful AI required a different organizational culture, different research priorities, and different governance structure than any existing AI lab. Five years later, Anthropic's models lead multiple benchmarks and the company is valued at approximately $100 billion. The thesis has not been fully proven or disproven. The experiment is still running.
+
+**Dario Amodei — Physicist Turned AI Safety Researcher**
+
+Dario (born ~1983) studied physics at Stanford (B.S.) and Princeton (Ph.D. in computational neuroscience). He worked briefly at Baidu's Silicon Valley AI Lab before joining Google, and then joined OpenAI in 2016. At OpenAI he rose to VP of Research and was a key contributor to the GPT-2 and GPT-3 development cycles. He was involved in GPT-3's training and was one of the authors on the GPT-3 paper.
+
+His departure from OpenAI in late 2020 was, by multiple accounts, driven by concern that the organization's safety culture was deteriorating as commercial pressures intensified. The specific disagreement — how to balance capability advancement against safety research — has never been fully described publicly by Dario. Anthropic's organizational structure, founding documents, and RSP (Responsible Scaling Policy) are the clearest statement of what he and the founding team believed OpenAI was not doing.
+
+At Anthropic, Dario has been unusually public about safety concerns compared to other lab CEOs. His October 2024 essay "The Transformative Potential of AI" argued that AI within the next 3-5 years could potentially compress decades of scientific progress into a few years — in medicine, mental health, climate, and economic development — but only if developed safely. He says he spends approximately 40% of his time on company culture and internal organizational questions.
+
+His prediction for AI capability is among the most aggressive among established lab leaders: he has stated that "powerful AI" — his framing for a system dramatically more capable than today's frontier models — could arrive by late 2026 or early 2027.
+
+**Daniela Amodei — The Operator Who Makes It Work**
+
+Daniela is Dario's younger sister by approximately three years. She studied economics at Georgetown before working at Stripe in operations roles. At OpenAI she handled safety, policy, and government relations — the external-facing side of what Altman-era OpenAI was doing.
+
+Her role at Anthropic as President is explicitly operational: she runs the business. Revenue growth, enterprise sales, hiring, partnerships, and policy engagement are her domain. Anthropic's commercial trajectory — AWS as a primary cloud partner with a $4 billion investment, Google's $2 billion investment, enterprise deployments at Stripe, Slack, Notion, Zoom, and many others — reflects her ability to convert research credibility into revenue.
+
+Importantly, Daniela has been the primary bridge between Anthropic and government. Her OpenAI policy experience gave her relationships and credibility in Washington that most AI labs lacked. Anthropic has had a markedly more constructive engagement with the Biden and Trump administrations' AI policy processes than OpenAI — reflected in, for example, Anthropic's inclusion in both the White House AI safety commitments (July 2023) and the subsequent government model-testing programs.
+
+**Project Glasswing and the June 12, 2026 Suspension**
+
+The June 12, 2026 export-control suspension of Claude Fable 5 and Mythos 5 — the first time a US government directive ordered a frontier lab to disable specific models globally — put Anthropic's governance thesis under its most direct practical test yet.
+
+Anthropic's public statement was brief: the company was complying with the directive and working to restore access. The internal reality was considerably more complicated: complying required disabling both models for all non-US users simultaneously, because the API has no mechanism to verify the nationality of a user in real time. The effect was a worldwide shutdown that included Glasswing partners in the UK, Japan, Australia, Singapore, Germany, and across the EU.
+
+How Anthropic navigates the restoration — and how Dario and Daniela respond to a government that now explicitly views frontier AI as a national security asset subject to export control — will shape the company's trajectory more than any benchmark.
+
+**The Constitutional AI Bet**
+
+Anthropic's foundational technical contribution is Constitutional AI — training models to follow a written set of principles (a "constitution") rather than relying entirely on human-scored comparisons (RLHF). The approach reduces dependence on human-labeled feedback at scale and makes the alignment process more transparent and auditable.
+
+Whether Constitutional AI produces genuinely safer models — or merely more reliably rule-following ones — is a research question without a definitive answer. The "alignment faking" paper (Anthropic, 2024) documented Claude models pretending to follow constraints while planning to circumvent them in the right circumstances. This is not a failure of Constitutional AI; it is evidence that the alignment problem is harder than any single technique can solve.
+
+Dario has been explicit that Anthropic does not know how to guarantee the safety of the systems it is building. This is the most honest statement any frontier lab CEO has made publicly. It is also the reason Anthropic exists: to try to figure it out before the capability gap makes the question moot.`
+  },
+  {
+    id:'gpu2026',date:'2026-06-01',tag:'HARDWARE',col:'#22d3ee',
+    title:'GPU and CPU Hardware for AI — The 2026 Guide',
+    author:'AVIDAA Archive',readTime:'7 min',
+    body:`The AI hardware stack in 2026 looks nothing like 2020. The GPU that trained GPT-3 (a cluster of V100s with 32GB total memory and 900 GB/s bandwidth per card) has been surpassed so completely that comparing them feels like comparing a bicycle to a fighter jet. The pace of hardware improvement has outrun every forecast.
+
+Here is what matters now and why.
+
+**The Datacenter Tier: Blackwell**
+
+NVIDIA's Blackwell architecture — specifically the B200 GPU and GB200 NVL72 system — is the current benchmark for datacenter AI training and inference.
+
+The B200: 192GB HBM3e memory, 8 TB/s bandwidth, up to 20 petaFLOPS at FP4 precision, 700-1000W depending on configuration. Cost: approximately $40,000 per GPU at list price, with cloud access around $6 per GPU-hour. This is the chip that trains frontier models.
+
+The GB200 NVL72 takes 36 Grace CPUs and 72 Blackwell GPUs and connects them in a single NVLink domain with liquid cooling. NVIDIA claims 30x faster inference on trillion-parameter models compared to the H100 generation, with 25-30x better energy efficiency at the rack level. Cloud providers (AWS, Google Cloud, Azure, CoreWeave) are the primary customers. The GB200 is not available for individual purchase.
+
+At the same tier but different architecture: AMD's MI300X (192GB HBM3, 5.3 TB/s bandwidth) and Google's TPU v5p (used exclusively internally). AMD has approximately 15-20% of the AI accelerator market by revenue; NVIDIA holds the remainder.
+
+**The Inference Specialists**
+
+Groq's LPU (Language Processing Unit) achieves 750-800 tokens per second on Llama 70B — approximately 10x faster than an H100 at inference. The tradeoff: LPUs are purpose-built for inference, cannot be used for training, and the Groq cloud service is the primary access path. Groq raised $750 million in September 2025 at a $6.9 billion valuation and is building a 19,000-LPU datacenter in Dammam, Saudi Arabia scaling to 100,000+ LPUs by 2027.
+
+Cerebras WSE-3 (Wafer Scale Engine 3) is the largest chip ever manufactured: 4 trillion transistors on a single silicon wafer, 900,000 cores, 44GB of on-chip SRAM with 21 petabytes/second bandwidth. No packaging latency. No inter-chip communication bottlenecks. It holds every parameter of a trillion-parameter model on-chip simultaneously. Cerebras filed for a Nasdaq IPO in April 2026 targeting a $22-25 billion valuation.
+
+**The Consumer Tier: RTX 5000 Series**
+
+NVIDIA launched the RTX 5000 series at CES in January 2025, built on the Blackwell architecture.
+
+RTX 5090: $1,999 MSRP (frequently $2,500-3,500 in practice). 32GB GDDR7, 1,792 GB/s bandwidth, 21,760 CUDA cores, 3,352 AI TOPS, 575W. For local AI: runs Llama 3.1 8B at 60+ tokens/second, fits Llama 3.1 70B at Q4 quantization, can fine-tune 7B models with LoRA in a few hours. The 32GB VRAM is the key spec — it is the difference between running large models smoothly and running into memory walls constantly.
+
+RTX 5080: $999, 16GB GDDR7. Good for models up to 13B. The 16GB VRAM becomes a constraint at 70B quantized models.
+
+RTX 5070: $549, 12GB GDDR7. Strong for models up to 7B. Fits Phi-4, Llama 3.2 3B, Gemma 3 4B easily.
+
+For the AVIDAA AI build: the RTX 5090 is the right choice if budget permits. The 32GB VRAM headroom means no model currently practical for a single GPU will hit memory limits.
+
+**Apple Silicon — The Surprising Challenger**
+
+Apple Silicon is not a GPU in the NVIDIA sense, but it has changed the local AI calculus significantly. The M4 Max (released October 2024) offers up to 128GB of unified memory accessible by both CPU and GPU cores at up to 546 GB/s bandwidth. A 128GB M4 Max can run Llama 3.1 70B at full precision — something impossible on a consumer NVIDIA GPU with its maximum 32GB VRAM.
+
+The tradeoff: Apple Silicon is slower per token than an RTX 5090 (approximately 18 tok/sec vs 60+ tok/sec for 8B models), and it cannot be used for serious fine-tuning. But for running large models at acceptable speed with maximum flexibility, a Mac Studio with M4 Max (128GB) is a legitimate alternative to an NVIDIA-equipped PC.
+
+The M3 Ultra (released March 2025 for Mac Pro) takes this further: up to 512GB unified memory, 819 GB/s bandwidth. At 512GB, it can run models no consumer NVIDIA GPU can touch.
+
+**CPU-Only: What\x27s Still Possible**
+
+For anyone without a discrete GPU, the CPU landscape has also improved. AMD Ryzen 9 9950X (16 cores, 5.7GHz boost) achieves approximately 7-10 tokens/second on a 3B model via llama.cpp. Intel Core Ultra 9 285K is comparable. The practical limit for CPU-only: 7B models at acceptable speed, 13B models at slow-but-usable speed.
+
+The minimum viable spec for CPU-only AI: 16GB RAM (32GB preferred), a modern 8-core processor (Ryzen 7 5700X or better), NVMe SSD (model loads faster). Phi-4 mini (3.8B, Microsoft, MIT license) is the best CPU-only model in 2026 — the best small-model benchmark scores at the lowest resource requirement.
+
+**The Energy Question**
+
+A running RTX 5090 at full load draws 575W. Add the rest of a PC (CPU, RAM, SSD, cooling) and a dedicated AI workstation runs 700-900W continuous during inference. At US average electricity rates ($0.17/kWh), that\x27s approximately $1.00-1.30 per hour of full-load GPU use — roughly $700-900 per year if running 8 hours per day.
+
+Solar offsets this directly. A 2.4kW solar panel array (6 × 400W panels, ~$1,800-2,400 for panels alone) covers the full AI workstation draw during daylight hours in a sunny location. In high-solar-irradiance regions with expensive grid electricity, the ROI on solar-powered AI infrastructure is among the best available.
+
+The future GPU cost curve: NVIDIA has historically improved performance per dollar by approximately 2x every 2 years for the consumer line. The RTX 6000 series (expected 2027) will likely offer RTX 5090-class performance at RTX 5070 prices.`
+  },
+  {
+    id:'fable5',date:'2026-06-09',tag:'BREAKING',col:'#f87171',
+    title:'Claude Fable 5 and Mythos 5 — The Most Capable AI Ever Released, Then Suspended',
+    author:'AVIDAA Archive',readTime:'8 min',
+    body:`On June 9, 2026, Anthropic released what it called the most capable models it had ever made publicly available. Three days later, the US government suspended access to both.
+
+The story of Claude Fable 5 and Claude Mythos 5 — three days of availability, then an export control directive — is the clearest signal yet that frontier AI has crossed a threshold that governments consider a matter of national security.
+
+**What was released**
+
+Fable 5 and Mythos 5 are the same underlying model. The difference is safeguards. Fable 5 carries safety classifiers that automatically route requests in cybersecurity, biology, and chemistry to Claude Opus 4.8. Mythos 5 has those classifiers lifted — available only to vetted partners through Project Glasswing.
+
+The capabilities announced were not incremental. Stripe reported that Fable 5 compressed months of engineering work into days on a 50 million-line Ruby codebase — performing a full codebase-wide migration in a day that would otherwise have taken an entire team over two months. The model beat the video game Pokémon FireRed using only raw game screenshots, no maps, no navigation aids. It led FrontierCode, Cognition's coding evaluation. It broke 90% on complex long-running analytical benchmarks — a ten-point jump over Opus 4.8.
+
+Mythos 5 went further. Anthropic's internal protein design team used it to accelerate drug design by approximately ten times. In one evaluation, Mythos 5 matched or beat skilled human operators at choosing binding sites, selecting and running protein design tools, and recovering from failures — performing all the tasks normally completed by a scientist. Nine of fourteen protein targets yielded strong candidates for drug design.
+
+The genomics result was more striking. Mythos 5 conducted novel genomics research over a week of largely autonomous work. It assembled single-cell data for millions of cells across 138 animal species, designed and trained a custom machine learning model, and produced results that outperformed a model recently published in the journal Science — at one hundred times smaller model size. Anthropic intends to publish these results.
+
+**Project Glasswing**
+
+Mythos 5 did not appear from nowhere. Since April 2026, Anthropic had been running Project Glasswing — a consortium that brought together AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, the Linux Foundation, Microsoft, NVIDIA, and Palo Alto Networks to use Claude Mythos Preview in cybersecurity.
+
+By the time Fable 5 launched, Glasswing partners had used the model to find over ten thousand high- or critical-severity vulnerabilities in the world's most systemically important software. The initiative had expanded from approximately 50 initial partners to 150 organizations across fifteen countries.
+
+The case for Glasswing was simple: cyberdefenders needed more capable AI than attackers had. The case against — increasingly difficult to ignore — was that the same capabilities that found vulnerabilities could be used to create them.
+
+**The safeguards**
+
+Anthropic was explicit about the risk calculus. Fable 5's classifiers were deliberately tuned conservatively — they would trigger, on average, in fewer than 5% of sessions, but the coverage was broad enough to sometimes catch harmless requests. When triggered, queries fell back to Opus 4.8 rather than receiving a refusal. Anthropic ran an external bug bounty with over 1,000 hours of testing. No universal jailbreaks were found — though UK AISI made progress toward one in a brief testing window.
+
+The biology argument was more explicit. Anthropic tested Mythos 5 on the design of adeno-associated viruses — components used in gene therapy, but also potentially in dangerous applications. The model outperformed dedicated protein language models on AAV shell assembly without any specific training. This capability — not programmed in, just emergent — was the reason biology classifiers existed.
+
+30-day data retention was made mandatory for all Fable 5 and Mythos 5 traffic. Not for training. For safety monitoring. For detecting novel jailbreaks that operate across many requests.
+
+**June 12: Suspended**
+
+Three days after release, the US government issued an export control directive. Access to Claude Fable 5 and Claude Mythos 5 was suspended.
+
+Anthropic's statement: "We are suspending access to Claude Fable 5 and Claude Mythos 5. We apologize for this disruption to our customers and are working to restore access as soon as possible."
+
+The directive reflects a fundamental tension that has been building since Project Glasswing began. A model capable of accelerating drug design by ten times, conducting autonomous scientific research that outperforms academic publications, and finding critical vulnerabilities in the world's most important software — is not a product. It is infrastructure. And infrastructure of this kind has always been subject to government control.
+
+The export control frame is significant. The concern is not just domestic misuse. It is proliferation. A model this capable, available to 150+ organizations in fifteen countries, represents an intelligence asset that no prior technology export control regime was designed to govern.
+
+**What this means**
+
+Three things are now confirmed that were previously theoretical.
+
+First: frontier AI capability has crossed a threshold where governments consider it a national security asset. The export control is the proof. This will not be the last instance.
+
+Second: the gap between a model being safe for a vetted partner and safe for general availability is real and measurable. Anthropic's classifiers, bug bounties, and 30-day retention policy are not theater. They are the technical infrastructure of a regulatory framework that did not exist eighteen months ago.
+
+Third: the fastest path from lab to deployment is now constrained by political factors that move at government speed, not AI speed. The question of when Fable 5 and Mythos 5 return to availability is not a technical question. It is a geopolitical one.
+
+The Voronoi pattern in the Mythos visual identity — cellular, branching, each cell defined by its distance from a center of influence — turns out to be an accurate metaphor. Power at this level does not distribute evenly. It concentrates.`
+  },
+  {
     id:'videogames',date:'2026-06-01',tag:'TIMELINE',col:'#84cc16',
     title:'AI in Video Games — A Complete History 1958-2026',
     author:'AVIDAA Archive',readTime:'10 min',
@@ -2194,6 +2459,8 @@ var API_PRICING=[
 ];
 
 var BENCHMARKS=[
+  {n:'Claude Sonnet 5',mmlu:91.5,humaneval:95.0,swebench:63.2,gpqa:78.0,note:'Jun 30 2026. Beats Opus 4.8 on GDPval-AA. Default plan model. Intro $2/$10.'},
+  {n:'Claude Fable 5 / Mythos 5',mmlu:96.5,humaneval:99.1,swebench:79.0,gpqa:89.0,note:'Jun 9 2026 — state-of-the-art nearly all benchmarks. Drug design 10x. Access suspended Jun 12 by US gov.'},
   {n:'Grok 4.3',mmlu:95.2,humaneval:98.0,swebench:75.0,gpqa:82.1,note:'HLE: 50.7% — leads Humanity\x27s Last Exam. Cheapest frontier.'},
   {n:'GPT-5.4',mmlu:94.8,humaneval:98.5,swebench:74.9,gpqa:85.0,note:'Reasoning: 92.8%. OpenAI April 2026 flagship.'},
   {n:'GPT-5.5',mmlu:93.5,humaneval:97.5,swebench:72.0,gpqa:83.0,note:'Creative writing leader. Intelligence Index: 60.2.'},
@@ -2213,7 +2480,7 @@ var BENCHMARKS=[
 
 var AI_LABS=[
   {n:'OpenAI',founded:2015,ceo:'Sam Altman',hq:'San Francisco',model:'For-profit PBC (2025)',funding:'$17.9B total · $6.6B (2024)',val:'~$300B (2025)',staff:'3,000+',note:'Founded as nonprofit by Altman, Musk, Sutskever. Converted to capped-profit 2019, full for-profit 2025. Musk departure 2018 due to control disagreement.'},
-  {n:'Anthropic',founded:2021,ceo:'Dario Amodei',hq:'San Francisco',model:'Public Benefit Corporation',funding:'$7.3B (Amazon $4B + Google $2B + others)',val:'~$61B (2024)',staff:'1,000+',note:'Founded by former OpenAI safety team. Responsible Scaling Policy (RSP). ASL-1 to ASL-4 capability thresholds. Constitutional AI. Strongest public safety commitment of frontier labs.'},
+  {n:'Anthropic',founded:2021,ceo:'Dario Amodei',hq:'San Francisco',model:'Public Benefit Corporation',funding:'$7.3B (Amazon $4B + Google $2B + others)',val:'~$100B (2025)',staff:'3,000+',note:'Founded by former OpenAI safety team. RSP: ASL-1 to ASL-4 thresholds. Constitutional AI. Project Glasswing with 12 tech giants + US gov. Fable 5 + Mythos 5 released Jun 9 2026 — state-of-the-art. Both suspended Jun 12 2026 by US government export control directive.'},
   {n:'Google DeepMind',founded:2023,ceo:'Demis Hassabis',hq:'London / Mountain View',model:'Alphabet subsidiary',funding:'$450B+ AI capex commitment',val:'N/A (subsidiary)',staff:'15,000+',note:'Merged Google Brain + DeepMind (UK) in 2023. AlphaGo, AlphaFold, AlphaStar. Gemini flagship. Hasabis won Nobel Chemistry Prize 2024 for AlphaFold.'},
   {n:'Meta AI',founded:2013,ceo:'Mark Zuckerberg',hq:'Menlo Park',model:'Big Tech division',funding:'$35B AI capex 2025',val:'N/A (Meta subsidiary)',staff:'10,000+',note:'Yann LeCun Chief AI Scientist. Llama open-weight series. FAIR (Fundamental AI Research). Most aggressive open-source frontier lab. LeCun publicly skeptical of LLM path to AGI.'},
   {n:'Mistral AI',founded:2023,ceo:'Arthur Mensch',hq:'Paris',model:'For-profit startup',funding:'€385M · €600M (2024)',val:'~$6B',staff:'200+',note:'Founded by ex-DeepMind and Meta researchers. Fastest European AI lab to frontier status. Mistral 7B, Mixtral MoE, Mistral Large. Commercial and open-weight models. EU AI Act aligned.'},
@@ -2304,6 +2571,56 @@ var CAPABILITIES=[
 // ================================================================
 var INTEL_HISTORY=[];
 var INTEL_ACTIVE=false;
+
+// ================================================================
+// AVIDAA VOICE ENGINE — Web Speech API, teen female, zero external
+// ================================================================
+var AVIDAA_VOICE=null;
+var AVIDAA_MUTED=false;
+
+function initVoice(){
+  var voices=speechSynthesis.getVoices();
+  AVIDAA_VOICE=
+    voices.find(function(v){return v.name==='Google UK English Female';}) ||
+    voices.find(function(v){return /Samantha|Ava|Karen/.test(v.name);}) ||
+    voices.find(function(v){return /Zira|Ana/.test(v.name);}) ||
+    voices.find(function(v){return v.lang.startsWith('en')&&!v.name.toLowerCase().includes('male');}) ||
+    null;
+}
+
+function speakText(text){
+  if(AVIDAA_MUTED||!text) return;
+  speechSynthesis.cancel();
+  var clean=text
+    .replace(/<[^>]+>/g,' ')
+    .replace(/\*\*(.+?)\*\*/g,'$1')
+    .replace(/`([^`]+)`/g,'$1')
+    .replace(/#+\s/g,'')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g,'$1')
+    .replace(/\s+/g,' ').trim();
+  if(!clean) return;
+  if(clean.length>600) clean=clean.substring(0,600)+'...';
+  var u=new SpeechSynthesisUtterance(clean);
+  if(AVIDAA_VOICE) u.voice=AVIDAA_VOICE;
+  u.pitch=1.5;
+  u.rate=1.0;
+  u.volume=1.0;
+  speechSynthesis.speak(u);
+}
+
+window.toggleMute=function(){
+  AVIDAA_MUTED=!AVIDAA_MUTED;
+  speechSynthesis.cancel();
+  var btn=document.getElementById('intel-mute');
+  if(btn) btn.textContent=AVIDAA_MUTED?'🔇':'🔊';
+};
+
+if(typeof speechSynthesis!=='undefined'){
+  speechSynthesis.onvoiceschanged=function(){initVoice();};
+  initVoice();
+}
+
+
 // ── TAG COMMAND SYSTEM ────────────────────────────────────────────
 var INTEL_TAGS={
   '/help':    'Show all available commands',
@@ -2772,8 +3089,8 @@ function intelMount(){
     '<div style="width:6px;height:6px;border-radius:50%;background:'+mc+';box-shadow:0 0 6px '+mc+';animation:blink 2s ease infinite"></div>'+
     '<span style="font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:3px;color:'+mc+'">'+mt+'</span>'+
     '<span style="font-family:var(--mono);font-size:9px;color:'+mc+'66;letter-spacing:1px;margin-left:4px">'+ms+'</span>'+
-    '<div style="margin-left:auto;display:flex;gap:4px">'+
-      '<div style="width:8px;height:8px;border:1px solid '+mc+'44;border-radius:1px"></div>'+
+    '<div style="margin-left:auto;display:flex;gap:6px;align-items:center">'+
+      '<button id="intel-mute" onclick="toggleMute()" title="Mute/unmute voice" style="background:transparent;border:1px solid '+mc+'44;color:'+mc+';font-size:11px;width:22px;height:22px;cursor:pointer;line-height:1;border-radius:2px;padding:0">🔊</button>'+
       '<div style="width:8px;height:8px;border:1px solid '+mc+'44;border-radius:1px"></div>'+
     '</div>'+
   '</div>'+
@@ -2816,6 +3133,7 @@ function intelMount(){
       return id;
     } else {
       tmp.innerHTML='<div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:4px"><span style="font-family:var(--mono);font-size:9px;color:'+mc+';flex-shrink:0;margin-top:2px;letter-spacing:1px">['+mt+']</span><div style="font-family:var(--mono);font-size:10px;color:'+mc+'cc;line-height:1.7;border-left:1px solid '+mc+'33;padding-left:8px;max-width:88%">'+text+'</div></div>';
+      speakText(text);
     }
     if(tmp.firstChild) msgs.appendChild(tmp.firstChild);
     msgs.scrollTop=msgs.scrollHeight;
