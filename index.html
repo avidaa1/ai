@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='20' fill='%23030305'/><text x='50%25' y='48%25' dominant-baseline='central' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23f59e0b'>A</text><text x='50%25' y='78%25' dominant-baseline='central' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%2322d3ee' letter-spacing='4'>AI</text></svg>">
 <meta name="theme-color" content="#050818">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://huggingface.co https://hacker-news.firebaseio.com https://export.arxiv.org; img-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://huggingface.co https://hacker-news.firebaseio.com https://api.openalex.org; img-src 'self' data:;">
 <meta name="referrer" content="no-referrer">
 <title>AVIDAA AI — The Complete Intelligence Record</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4136,30 +4136,29 @@ async function loadHNFeed(){
 async function loadArXivFeed(){
   var el=document.getElementById('arxiv-feed');
   if(!el||_axLoaded)return;
-  el.innerHTML='<div style="font-size:14px;color:var(--t3);padding:12px">Loading arXiv AI papers\u2026</div>';
+  function msg(t,c){el.textContent='';var d=document.createElement('div');d.style.cssText='font-size:14px;padding:12px;color:'+(c||'var(--t3)');d.textContent=t;el.appendChild(d);}
+  msg('Loading recent arXiv AI papers…');
   try{
-    var url='https://export.arxiv.org/api/query?search_query=cat:cs.AI+OR+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=10';
-    var xml=await fetch(url).then(function(r){return r.text();});
-    var doc=new DOMParser().parseFromString(xml,'text/xml');
-    var entries=[].slice.call(doc.querySelectorAll('entry'));
-    if(!entries.length){el.innerHTML='<div style="font-size:14px;color:var(--t3);padding:12px">No papers found.</div>';return;}
-    _axLoaded=true;
-    var h='';
-    entries.forEach(function(e){
-      var title=e.querySelector('title').textContent.trim().replace(/\n/g,' ');
-      var authors=[].slice.call(e.querySelectorAll('author name')).slice(0,3).map(function(a){return a.textContent;}).join(', ');
-      var pub=e.querySelector('published').textContent.slice(0,10);
-      var link=e.querySelector('id').textContent.trim();
-      var sumEl=e.querySelector('summary');
-      var sum=sumEl?sumEl.textContent.trim().replace(/\n/g,' ').slice(0,180)+'...':'';
-      h+='<a href="'+link+'" target="_blank" rel="noopener" style="display:block;padding:10px 14px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .15s" onmouseover="this.style.background=\'var(--surface)\'" onmouseout="this.style.background=\'transparent\'">';
-      h+='<div style="font-size:14px;color:var(--cyan);margin-bottom:3px;line-height:1.4">'+title+'</div>';
-      h+='<div style="font-size:13px;color:var(--t2);margin-bottom:3px">'+authors+'</div>';
-      h+='<div style="font-size:13px;color:var(--t3);line-height:1.5">'+sum+'</div>';
-      h+='<div style="font-size:12px;color:var(--t3);margin-top:3px">arXiv \xb7 '+pub+'</div></a>';
+    /* arXiv's own API sends no CORS header, so browsers always blocked it. OpenAlex indexes arXiv, allows browser requests and needs no key. */
+    var url='https://api.openalex.org/works?filter=primary_location.source.id:S4306400194&sort=publication_date:desc&per-page=10&select=title,publication_date,authorships,primary_location';
+    var r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);
+    var j=await r.json();var items=(j&&j.results)||[];
+    if(!items.length){msg('No papers found.');return;}
+    _axLoaded=true;el.textContent='';
+    items.forEach(function(w){
+      var title=String(w.title||'').replace(/[​-‏‪-‮⁠-⁤﻿]/g,'').slice(0,200);
+      var link=String((w.primary_location&&w.primary_location.landing_page_url)||'');
+      if(!/^https:\/\/arxiv\.org\//.test(link))link='';
+      var authors=(w.authorships||[]).slice(0,3).map(function(x){return (x.author&&x.author.display_name)||'';}).filter(Boolean).join(', ').slice(0,120);
+      var pub=String(w.publication_date||'').slice(0,10);
+      var a=document.createElement(link?'a':'div');
+      if(link){a.href=link;a.target='_blank';a.rel='noopener noreferrer';}
+      a.style.cssText='display:block;padding:10px 14px;border-bottom:1px solid var(--border);text-decoration:none';
+      var t=document.createElement('div');t.style.cssText='font-size:14px;color:var(--cyan);margin-bottom:3px;line-height:1.4';t.textContent=title;
+      var m=document.createElement('div');m.style.cssText='font-size:13px;color:var(--t2)';m.textContent=(authors?authors+' · ':'')+pub+' · arXiv via OpenAlex';
+      a.appendChild(t);a.appendChild(m);el.appendChild(a);
     });
-    el.innerHTML=h;
-  }catch(e){el.innerHTML='<div style="font-size:14px;color:var(--volatile);padding:12px">Feed error: '+e.message+'</div>';}
+  }catch(e){msg('Source down: arXiv papers via OpenAlex could not be reached ('+String(e.message||e).slice(0,60)+'), checked '+new Date().toISOString().slice(0,10),'var(--volatile)');}
 }
 
 function buildLive(){
@@ -4816,7 +4815,7 @@ if(document.readyState==='complete')start();else addEventListener('load',start);
 addEventListener('resize',sched);})();</script><script id="av-shell-20261124">/* AVIDAA shell: shared header (or floating pill) + footer with the "Last updated" stamp. No outside calls, no tracking.
    Template tokens are replaced when a page is built: AI Archive --av-knowledge Knowledge 2026-11-24 06:36 */
 (function(){
-  var NAME='AI Archive',SECTOR='--av-knowledge',STAMP='2026-11-25 15:57',HOME='https://avidaa1.github.io/';
+  var NAME='AI Archive',SECTOR='--av-knowledge',STAMP='2026-11-25 18:04',HOME='https://avidaa1.github.io/';
   var ARROW='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function build(){
     if(!document.body||document.querySelector('.av-footer'))return;

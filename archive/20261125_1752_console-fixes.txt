@@ -1,0 +1,30 @@
+Replaced loadArXivFeed (arXiv export API, no CORS header, rendered with innerHTML):
+
+async function loadArXivFeed(){
+  var el=document.getElementById('arxiv-feed');
+  if(!el||_axLoaded)return;
+  el.innerHTML='<div style="font-size:14px;color:var(--t3);padding:12px">Loading arXiv AI papers\u2026</div>';
+  try{
+    var url='https://export.arxiv.org/api/query?search_query=cat:cs.AI+OR+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=10';
+    var xml=await fetch(url).then(function(r){return r.text();});
+    var doc=new DOMParser().parseFromString(xml,'text/xml');
+    var entries=[].slice.call(doc.querySelectorAll('entry'));
+    if(!entries.length){el.innerHTML='<div style="font-size:14px;color:var(--t3);padding:12px">No papers found.</div>';return;}
+    _axLoaded=true;
+    var h='';
+    entries.forEach(function(e){
+      var title=e.querySelector('title').textContent.trim().replace(/\n/g,' ');
+      var authors=[].slice.call(e.querySelectorAll('author name')).slice(0,3).map(function(a){return a.textContent;}).join(', ');
+      var pub=e.querySelector('published').textContent.slice(0,10);
+      var link=e.querySelector('id').textContent.trim();
+      var sumEl=e.querySelector('summary');
+      var sum=sumEl?sumEl.textContent.trim().replace(/\n/g,' ').slice(0,180)+'...':'';
+      h+='<a href="'+link+'" target="_blank" rel="noopener" style="display:block;padding:10px 14px;border-bottom:1px solid var(--border);text-decoration:none;transition:background .15s" onmouseover="this.style.background=\'var(--surface)\'" onmouseout="this.style.background=\'transparent\'">';
+      h+='<div style="font-size:14px;color:var(--cyan);margin-bottom:3px;line-height:1.4">'+title+'</div>';
+      h+='<div style="font-size:13px;color:var(--t2);margin-bottom:3px">'+authors+'</div>';
+      h+='<div style="font-size:13px;color:var(--t3);line-height:1.5">'+sum+'</div>';
+      h+='<div style="font-size:12px;color:var(--t3);margin-top:3px">arXiv \xb7 '+pub+'</div></a>';
+    });
+    el.innerHTML=h;
+  }catch(e){el.innerHTML='<div style="font-size:14px;color:var(--volatile);padding:12px">Feed error: '+e.message+'</div>';}
+}
