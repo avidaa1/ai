@@ -6,12 +6,9 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='20' fill='%23030305'/><text x='50%25' y='48%25' dominant-baseline='central' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23f59e0b'>A</text><text x='50%25' y='78%25' dominant-baseline='central' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%2322d3ee' letter-spacing='4'>AI</text></svg>">
 <meta name="theme-color" content="#050818">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://huggingface.co https://hacker-news.firebaseio.com https://export.arxiv.org; frame-ancestors 'none'; img-src 'self' data:;">
-<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://huggingface.co https://hacker-news.firebaseio.com https://export.arxiv.org; img-src 'self' data:;">
 <meta name="referrer" content="no-referrer">
 <title>AVIDAA AI — The Complete Intelligence Record</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G8M1YZQ8WF"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G8M1YZQ8WF');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow+Condensed:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -1490,7 +1487,7 @@ var CM={
   'Hermes 3 / Hermes 4':['A',false, 270, 'NousResearch/Hermes-3-Llama-3.1-8B',   'Nous Research official — HF downloads live'],
   'Gemini 3.1 Pro':     ['A',false, 101, null,                                    'Google Feb 19 2026 official model card; 94.3% GPQA Diamond confirmed'],
   'Gemini 3.5 Flash':   ['A',false, 11,  null,                                    'Google I/O May 2026; Intelligence Index 55 confirmed; 284 t/s confirmed'],
-  'DeepSeek V4':        ['B',false, 40,  'deepseek-ai/DeepSeek-V4',               'DeepSeek Apr 2026; pricing confirmed; HF live'],
+  'DeepSeek V4':        ['B',false, 40,  '',               'DeepSeek Apr 2026; pricing confirmed; HF live'],
   'Llama 3 70B':    ['A',false, 400,  'meta-llama/Meta-Llama-3-70B-Instruct', 'Meta Apr 2024; HF downloads live'],
   'GPT-4o':         ['A',false, 380,  null,                                    'OpenAI May 2024 official; params undisclosed'],
   'Claude 3.5 Sonnet':['A',false,340, null,                                   'Anthropic Jun 2024; computer-use confirmed Oct 2024'],
@@ -1503,7 +1500,7 @@ var CM={
   'DeepSeek-R1':    ['A',false, 127,  'deepseek-ai/DeepSeek-R1',              'DeepSeek Jan 2025; MIT license; Nature paper Sep 2025; HF live'],
   'o3 + o4-mini':   ['A',false, 41,   null,                                    'OpenAI Apr 2025 official announcement'],
   'Claude Opus 4':  ['A',false, 5,    null,                                    'Anthropic May 2025 system card; Apollo Research 84% — all documented'],
-  'Llama 4 Scout / Maverick':['B',false,52,'meta-llama/Llama-4-Scout',        'Meta Apr 2025; LMArena controversy documented; HF live'],
+  'Llama 4 Scout / Maverick':['B',false,52,'',        'Meta Apr 2025; LMArena controversy documented; HF live'],
   'Gemini 2.5 Pro': ['A',false, 63,   null,                                    'Google Mar 2025 official; LMArena #1 confirmed'],
   'Gemma 3':        ['A',false, 76,   'google/gemma-3-4b-it',                 'Google Mar 2025; HF downloads live'],
   'Grok 3':         ['C',false, 99,   null,                                    'xAI Feb 2025 official; params undisclosed; Colossus cluster confirmed'],
@@ -1512,7 +1509,7 @@ var CM={
   'Claude Opus 4.5–4.7':['A',false,11,null,                                   'Anthropic Nov 2025-Apr 2026; 80.9% SWE-bench confirmed'],
   'GPT-5.5 / GPT-5.5 Pro':['A',false,34,null,                                 'OpenAI Apr 2026 official release'],
   'Gemini 3 Pro':   ['A',false, 190,  null,                                    'Google Nov 2025 official; LMArena #1 at launch confirmed'],
-  'Gemma 4':        ['A',false, 55,   'google/gemma-4-4b',                     'Google Apr 2026 official; Apache 2.0 confirmed; HF live'],
+  'Gemma 4':        ['A',false, 55,   '',                     'Google Apr 2026 official; Apache 2.0 confirmed; HF live'],
   'DeepSeek V3.2-Speciale':['A',false,177,null,                                'DeepSeek Dec 2025; IMO/ICPC gold medals verified'],
   'Claude 3 Opus':  ['A',true,  0,    null,                                    'Anthropic official release Mar 4 2024 — settled fact'],
   'GPT-5.5':        ['A',false, 120,  null,                                    'OpenAI official Apr 2026 announcement; pricing + Intelligence Index self-reported'],
@@ -4819,7 +4816,7 @@ if(document.readyState==='complete')start();else addEventListener('load',start);
 addEventListener('resize',sched);})();</script><script id="av-shell-20261124">/* AVIDAA shell: shared header (or floating pill) + footer with the "Last updated" stamp. No outside calls, no tracking.
    Template tokens are replaced when a page is built: AI Archive --av-knowledge Knowledge 2026-11-24 06:36 */
 (function(){
-  var NAME='AI Archive',SECTOR='--av-knowledge',STAMP='2026-11-25 15:20',HOME='https://avidaa1.github.io/';
+  var NAME='AI Archive',SECTOR='--av-knowledge',STAMP='2026-11-25 15:57',HOME='https://avidaa1.github.io/';
   var ARROW='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function build(){
     if(!document.body||document.querySelector('.av-footer'))return;
